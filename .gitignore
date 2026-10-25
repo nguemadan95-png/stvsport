@@ -1,0 +1,7 @@
+.env
+secret.key
+ADMIN_MOT_DE_PASSE.txt
+stv_sport.db
+.venv/
+__pycache__/
+*.pyc

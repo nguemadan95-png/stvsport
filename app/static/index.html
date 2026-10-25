@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STV SPORT — Barça, Real Madrid et tout le sport</title>
+<meta name="description" content="STV SPORT : résumés, directs autorisés, calendrier et résultats du FC Barcelone et du Real Madrid.">
+<link rel="stylesheet" href="/static/style.css?v=4"></head>
+<body>
+<header><a class="brand" href="#top"><span class="logo">S</span> STV <b>SPORT</b></a>
+<nav><a href="#clubs">Barça · Real</a><a href="#live">Direct</a><a href="#matches">Matchs</a><a href="#replay">Replays</a><a href="#channels">Chaînes</a></nav>
+<div class="account"><span id="who">Invité</span><button class="outline" id="btn-login" data-action="open-auth">Connexion</button><button class="outline hidden" id="btn-pass" data-action="open-pass">Mot de passe</button><button class="outline hidden" id="logout" data-action="logout">Quitter</button></div></header>
+<main id="top">
+<section class="hero"><div><span class="eyebrow">● BARÇA · REAL MADRID · EL CLÁSICO</span><h1>Le sport.<br><em>Sans manquer l’action.</em></h1><p>Résumés, buts, directs officiels autorisés, calendrier et résultats des deux plus grands clubs d’Espagne, au même endroit.</p><div class="actions"><a class="primary" href="#clubs">▶ Voir Barça &amp; Real</a><a class="secondary" href="#matches">Explorer les matchs</a></div><small>Seuls les flux autorisés sont affichés. Si aucun direct officiel n’existe, STV SPORT le dit clairement.</small></div>
+<div class="hero-art"><div class="versus"><div class="vs-club" id="hero-barca"></div><span class="vs">VS</span><div class="vs-club" id="hero-real"></div></div><span class="tag">EL CLÁSICO</span></div></section>
+
+<section id="clubs"><div class="section-head"><div><label>CLUBS</label><h2>FC Barcelone · Real Madrid</h2></div></div>
+<div class="tabs" id="club-tabs"><button class="tab active" data-action="club" data-club="barcelona">Barça</button><button class="tab" data-action="club" data-club="real-madrid">Real Madrid</button><button class="tab" data-action="club" data-club="clasico">El Clásico</button></div>
+<div id="club-view"></div></section>
+
+<section id="live"><div class="section-head"><div><label>À NE PAS MANQUER</label><h2>En direct maintenant</h2></div><span class="live-pill">● LIVE</span></div><div id="live-list" class="cards"></div></section>
+<section id="api-live"><div class="section-head"><div><label>DONNÉES AUTOMATIQUES</label><h2>Scores en direct (SportsAPI)</h2></div><button class="secondary" data-action="refresh-live">↻ Actualiser</button></div><div id="api-live-list" class="cards"><div class="empty">Chargement…</div></div></section>
+<section id="matches"><div class="section-head"><div><label>PROGRAMME</label><h2>Matchs &amp; événements</h2></div><div class="filters"><input id="search" type="search" placeholder="Rechercher une équipe…"><select id="sport-filter"><option>Tous</option><option>Football</option><option>Basketball</option><option>Tennis</option><option>Rugby</option><option>Formule 1</option><option>Boxe</option><option>Autre</option></select></div></div><div id="match-list" class="cards"></div></section>
+<section id="replay"><div class="section-head"><div><label>À REVOIR</label><h2>Rediffusions &amp; temps forts</h2></div></div><div id="video-list" class="cards"></div></section>
+<section id="channels"><div class="section-head"><div><label>VOS DIFFUSEURS</label><h2>Chaînes sportives</h2></div></div><div id="channel-list" class="cards"></div></section>
+<section id="favs" class="hidden"><div class="section-head"><div><label>MON COMPTE</label><h2>Mes favoris &amp; mon historique</h2></div></div><div id="fav-list" class="cards"></div><h3 class="sub">Récemment regardé</h3><div id="history-list" class="history"></div></section>
+
+<section class="admin hidden" id="admin"><div class="section-head"><div><label>ESPACE DE GESTION</label><h2>Administration</h2></div><span class="live-pill">ADMIN</span></div><div class="stats" id="stats"></div>
+<div class="admin-grid">
+<form data-form="/channels"><h3>Ajouter une chaîne / flux live</h3><input name="name" placeholder="Nom de la chaîne" required><input name="sport" placeholder="Sport" value="Multi-sports"><input name="stream_url" placeholder="URL https (.m3u8, .mp4 ou embed)" required><select name="stream_type"><option>hls</option><option>mp4</option><option>embed</option></select><textarea name="description" placeholder="Description"></textarea><button class="primary">Ajouter la chaîne</button></form>
+<form data-form="/matches"><h3>Ajouter un match</h3><input name="home_team" placeholder="Équipe 1" required><input name="away_team" placeholder="Équipe 2" required><input name="competition" placeholder="Compétition"><input name="sport" placeholder="Sport" value="Football"><input name="starts_at" placeholder="Date et heure (ex. 2026-10-25 20:00)"><select name="status"><option value="upcoming">À venir</option><option value="live">En direct</option><option value="finished">Terminé</option></select><input name="stream_url" placeholder="URL du direct autorisé"><input name="replay_url" placeholder="URL de rediffusion"><button class="primary">Ajouter le match</button></form>
+<form data-form="/videos"><h3>Ajouter une rediffusion</h3><input name="title" placeholder="Titre" required><input name="sport" placeholder="Sport" value="Football"><input name="category" placeholder="Catégorie" value="Highlights"><input name="video_url" placeholder="URL vidéo ou embed autorisé" required><textarea name="description" placeholder="Description"></textarea><button class="primary">Ajouter la vidéo</button></form></div></section>
+</main>
+<footer><b>STV SPORT</b><span>Une plateforme. Tous les sports.</span><span>Respect des droits de diffusion.</span></footer>
+
+<div id="player-modal" class="modal hidden"><div class="player-box"><button class="close" data-action="close-player" aria-label="Fermer">✕</button><h2 id="player-title">Lecture</h2><div id="player-area"></div><p id="player-note"></p></div></div>
+<div id="auth-modal" class="modal hidden"><div class="auth-box"><button class="close" data-action="close-auth" aria-label="Fermer">✕</button><h2 id="auth-title">Connexion</h2><form id="auth-form"><input id="auth-user" placeholder="Nom d’utilisateur" autocomplete="username" required><input id="auth-email" class="hidden" type="email" placeholder="E-mail"><input id="auth-pass" type="password" placeholder="Mot de passe (8 caractères min.)" autocomplete="current-password" required><button class="primary" id="auth-submit">Se connecter</button></form><p id="auth-switch">Pas encore de compte ? <a data-action="toggle-auth">Créer un compte</a></p></div></div>
+<div id="pass-modal" class="modal hidden"><div class="auth-box"><button class="close" data-action="close-pass" aria-label="Fermer">✕</button><h2>Changer le mot de passe</h2><form id="pass-form"><input id="pass-old" type="password" placeholder="Ancien mot de passe" required><input id="pass-new" type="password" placeholder="Nouveau mot de passe (8 min.)" minlength="8" required><button class="primary">Enregistrer</button></form></div></div>
+<div id="toast" role="status"></div>
+<script src="/static/app.js?v=4"></script></body></html>
